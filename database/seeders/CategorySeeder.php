@@ -13,6 +13,14 @@ class CategorySeeder extends Seeder
             ['name' => 'Shirts'],
             ['name' => 'Pants'],
             ['name' => 'Accessories'],
+            ['name' => 'Shoes'],
+            ['name' => 'Hats'],
+            ['name' => 'Outerwear'],
+            ['name' => 'Underwear'],
+            ['name' => 'Socks'],
+            ['name' => 'Bags'],
+            ['name' => 'Belts'],
+            ['name' => 'Jewelry'],
         ]);
     }
 }
