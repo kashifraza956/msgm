@@ -50,9 +50,9 @@ Route::prefix('admin')->group(function () {
         Route::resource('orders', AdminOrder::class, ['only' => ['index','update'], 'as' => 'admin']);
         Route::get('feedback', [AdminFeedback::class, 'index'])->name('admin.feedback.index');
 
-        Route::middleware('is_admin')->group(function () {
-            Route::resource('users', AdminUser::class, ['except' => ['show'], 'as' => 'admin']);
-        });
+        Route::resource('users', AdminUser::class, ['except' => ['show'], 'as' => 'admin']);
+        // Route::middleware('is_admin')->group(function () {
+        // });
 
         Route::post('logout', function () {
             Auth::logout();
