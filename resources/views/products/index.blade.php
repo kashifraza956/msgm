@@ -1,7 +1,13 @@
 @extends('layouts.frontend')
 
 @section('content')
-<h1 class="mb-4">{{ $category->name }}</h1>
+<h1 class="mb-4">Products</h1>
+<form method="GET" action="{{ route('products.index') }}" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search products" value="{{ request('q') }}">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+</form>
 <div class="row">
 @foreach($products as $product)
     <div class="col-md-3 col-sm-6 mb-4">

@@ -24,4 +24,5 @@
     @endforeach
     </tbody>
 </table>
+{{ $feedback->links() }}
 @endsection
