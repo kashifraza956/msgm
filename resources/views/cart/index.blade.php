@@ -1,12 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.frontend')
 
 @section('content')
-<h1>Your Cart</h1>
+<h1 class="mb-4">Your Cart</h1>
 @if(empty($cart))
 <p>No items.</p>
 @else
-<table class="table">
-    <tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th><th></th></tr>
+<table class="table align-middle">
+    <tr><th>Product</th><th style="width:140px">Qty</th><th>Price</th><th>Total</th><th></th></tr>
     @foreach($cart as $id => $item)
     <tr>
         <td>{{ $item['product']->name }}</td>
@@ -28,6 +28,8 @@
     </tr>
     @endforeach
 </table>
-<a href="{{ route('orders.checkout') }}" class="btn btn-success">Checkout</a>
+<div class="text-end">
+    <a href="{{ route('orders.checkout') }}" class="btn btn-success">Checkout</a>
+</div>
 @endif
 @endsection
