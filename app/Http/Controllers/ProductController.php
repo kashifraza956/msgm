@@ -18,6 +18,13 @@ class ProductController extends Controller
 
         $products = $query->with('category')->paginate(12)->withQueryString();
 
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('products._cards', ['products' => $products])->render(),
+                'next_page_url' => $products->nextPageUrl(),
+            ]);
+        }
+
         return view('products.index', compact('products'));
     }
 
