@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/season-products', [ProductController::class, 'season'])->name('season.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');

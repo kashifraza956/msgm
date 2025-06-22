@@ -35,4 +35,5 @@
     @endforeach
     </tbody>
 </table>
+{{ $orders->links() }}
 @endsection

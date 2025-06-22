@@ -22,4 +22,5 @@
     @endforeach
     </tbody>
 </table>
+{{ $categories->links() }}
 @endsection
