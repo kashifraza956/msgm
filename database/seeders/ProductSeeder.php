@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
             'name' => 'Sample Product',
             'description' => 'A sample product',
             'price' => 1000,
-            'sizes' => json_encode(['Small','Medium','Large','Extra Large'])
+            'sizes' => ['Small', 'Medium', 'Large', 'Extra Large'],
         ]);
     }
 }

@@ -28,8 +28,8 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id'
         ]);
-        $data = $request->only('name','price','category_id','description');
-        $data['sizes'] = json_encode($request->input('sizes', []));
+        $data = $request->only('name', 'price', 'category_id', 'description');
+        $data['sizes'] = $request->input('sizes', []);
         if($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products','public');
         }
@@ -50,8 +50,8 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id'
         ]);
-        $data = $request->only('name','price','category_id','description');
-        $data['sizes'] = json_encode($request->input('sizes', []));
+        $data = $request->only('name', 'price', 'category_id', 'description');
+        $data['sizes'] = $request->input('sizes', []);
         if($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products','public');
         }
