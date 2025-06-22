@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderPlaced;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -57,10 +58,8 @@ class OrderController extends Controller
 
         session()->forget('cart');
 
-        // Fake email via log
-        Mail::raw('Order '.$order->id.' placed.', function($message) use ($order) {
-            $message->to($order->customer_email);
-        });
+        // Send order confirmation email
+        Mail::to($order->customer_email)->send(new OrderPlaced($order));
 
         return redirect()->route('orders.confirmation', $order);
     }
