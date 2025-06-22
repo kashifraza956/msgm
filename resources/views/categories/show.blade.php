@@ -1,18 +1,11 @@
 @extends('layouts.frontend')
 
 @section('content')
-<div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container py-5">
-        <h1 class="display-5 fw-bold">Welcome to MSGM</h1>
-        <p class="col-md-8 fs-5">Discover the latest fashion trends.</p>
-    </div>
-</div>
-
-<h2 class="mb-4">Featured Products</h2>
+<h1 class="mb-4">{{ $category->name }}</h1>
 <div class="row">
 @foreach($products as $product)
-    <div class="col-md-3 col-sm-6">
-        <div class="card mb-4 h-100">
+    <div class="col-md-3 col-sm-6 mb-4">
+        <div class="card h-100">
             @if($product->image)
                 <img src="{{ asset('storage/'.$product->image) }}" class="card-img-top" alt="{{ $product->name }}">
             @else
@@ -24,19 +17,6 @@
                 <a href="{{ route('products.show', $product) }}" class="btn btn-outline-primary mt-auto">View</a>
             </div>
         </div>
-    </div>
-@endforeach
-</div>
-
-<h2 class="mt-5 mb-4">Shop by Category</h2>
-<div class="row">
-@foreach($categories as $category)
-    <div class="col-md-3 col-sm-6 mb-3">
-        <a class="text-decoration-none" href="{{ route('categories.show', $category) }}">
-            <div class="card h-100 text-center p-4">
-                <span class="fw-semibold">{{ $category->name }}</span>
-            </div>
-        </a>
     </div>
 @endforeach
 </div>
