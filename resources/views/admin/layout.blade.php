@@ -73,7 +73,7 @@
                     </li>
                     @if(Auth::user()->role === 'main')
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>User Management</p>
                         </a>
@@ -88,6 +88,18 @@
     <div class="content-wrapper">
         <section class="content pt-3">
             <div class="container-fluid">
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @yield('content')
             </div>
         </section>

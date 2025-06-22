@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategory;
 use App\Http\Controllers\Admin\ProductController as AdminProduct;
 use App\Http\Controllers\Admin\OrderController as AdminOrder;
 use App\Http\Controllers\Admin\FeedbackController as AdminFeedback;
+use App\Http\Controllers\Admin\UserController as AdminUser;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -48,6 +49,11 @@ Route::prefix('admin')->group(function () {
         Route::resource('products', AdminProduct::class, ['as' => 'admin']);
         Route::resource('orders', AdminOrder::class, ['only' => ['index','update'], 'as' => 'admin']);
         Route::get('feedback', [AdminFeedback::class, 'index'])->name('admin.feedback.index');
+
+        Route::middleware('is_admin')->group(function () {
+            Route::resource('users', AdminUser::class, ['except' => ['show'], 'as' => 'admin']);
+        });
+
         Route::post('logout', function () {
             Auth::logout();
             return redirect()->route('admin.login');
