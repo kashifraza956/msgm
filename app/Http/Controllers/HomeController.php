@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    // Will be used to return all the listings
     public function index()
     {
         $categories = Category::all();

@@ -13,53 +13,71 @@ use App\Http\Controllers\Admin\ProductController as AdminProduct;
 use App\Http\Controllers\Admin\OrderController as AdminOrder;
 use App\Http\Controllers\Admin\FeedbackController as AdminFeedback;
 use App\Http\Controllers\Admin\UserController as AdminUser;
+use App\Http\Controllers\KashifController;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/season-products', [ProductController::class, 'season'])->name('season.index');
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
-Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
-Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+// Route::get('/kashif', function () {
+//     // return 'Hello Kashif!';
+//     return view('welcome');
+// })->name('kashif');
 
-Route::get('/checkout', [OrderController::class, 'checkout'])->name('orders.checkout');
-Route::post('/checkout', [OrderController::class, 'place'])->name('orders.place');
-Route::get('/order/{order}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
+Route::get('/employees', [KashifController::class, 'index'])->name('employees.index');
+Route::get('/employees/create', [KashifController::class, 'create'])->name('employees.create');
+Route::post('/employees/store', [KashifController::class, 'store'])->name('employees.store');
+Route::get('/employees/edit/{id}', [KashifController::class, 'edit'])->name('employees.edit');
+Route::put('/employees/update/{id}', [KashifController::class, 'update'])->name('employees.update');
+Route::delete('/employees/delete/{id}', [KashifController::class, 'destroy'])->name('employees.destroy');
 
-Route::post('/feedback/{product}', [FeedbackController::class, 'store'])->name('feedback.store');
 
-// Admin routes
-Route::prefix('admin')->group(function () {
-    Route::get('login', function () {
-        return view('admin.login');
-    })->name('admin.login');
-    Route::post('login', function () {
-        $credentials = request(['email', 'password']);
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
-        }
-        return back()->withErrors(['email' => 'Invalid credentials']);
-    })->name('admin.login.post');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::middleware('auth')->group(function () {
-        Route::get('/', [AdminDashboard::class, 'dashboard'])->name('admin.dashboard');
-        Route::resource('categories', AdminCategory::class, ['as' => 'admin']);
-        Route::resource('products', AdminProduct::class, ['as' => 'admin']);
-        Route::resource('orders', AdminOrder::class, ['only' => ['index','update'], 'as' => 'admin']);
-        Route::get('feedback', [AdminFeedback::class, 'index'])->name('admin.feedback.index');
 
-        Route::resource('users', AdminUser::class, ['except' => ['show'], 'as' => 'admin']);
-        // Route::middleware('is_admin')->group(function () {
-        // });
 
-        Route::post('logout', function () {
-            Auth::logout();
-            return redirect()->route('admin.login');
-        })->name('admin.logout');
-    });
-});
+// Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+// Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+// Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+// Route::get('/season-products', [ProductController::class, 'season'])->name('season.index');
+// Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
+// Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+// Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+// Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
+// Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+
+// Route::get('/checkout', [OrderController::class, 'checkout'])->name('orders.checkout');
+// Route::post('/checkout', [OrderController::class, 'place'])->name('orders.place');
+// Route::get('/order/{order}', [OrderController::class, 'confirmation'])->name('orders.confirmation');
+
+// Route::post('/feedback/{product}', [FeedbackController::class, 'store'])->name('feedback.store');
+
+// // Admin routes
+// Route::prefix('admin')->group(function () {
+//     Route::get('login', function () {
+//         return view('admin.login');
+//     })->name('admin.login');
+//     Route::post('login', function () {
+//         $credentials = request(['email', 'password']);
+//         if (Auth::attempt($credentials)) {
+//             return redirect()->route('admin.dashboard');
+//         }
+//         return back()->withErrors(['email' => 'Invalid credentials']);
+//     })->name('admin.login.post');
+
+//     Route::middleware('auth')->group(function () {
+//         Route::get('/', [AdminDashboard::class, 'dashboard'])->name('admin.dashboard');
+//         Route::resource('categories', AdminCategory::class, ['as' => 'admin']);
+//         Route::resource('products', AdminProduct::class, ['as' => 'admin']);
+//         Route::resource('orders', AdminOrder::class, ['only' => ['index','update'], 'as' => 'admin']);
+//         Route::get('feedback', [AdminFeedback::class, 'index'])->name('admin.feedback.index');
+
+//         Route::resource('users', AdminUser::class, ['except' => ['show'], 'as' => 'admin']);
+//         // Route::middleware('is_admin')->group(function () {
+//         // });
+
+//         Route::post('logout', function () {
+//             Auth::logout();
+//             return redirect()->route('admin.login');
+//         })->name('admin.logout');
+//     });
+// });
